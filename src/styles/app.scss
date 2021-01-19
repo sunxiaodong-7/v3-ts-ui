@@ -1,0 +1,41 @@
+.app-header {
+	height: 60px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	line-height: 60px;
+	padding: 0 40px;
+	box-sizing: border-box;
+	box-shadow: $boxShadow;
+	background-color: $backgroundColor;
+	display: flex;
+	font-size: 24px;
+	font-style: italic;
+	font-weight: bold;
+	color: darkcyan;
+}
+.app-sidebar {
+	width: 240px;
+	position: fixed;
+	top: 60px;
+	left: 0;
+	padding: 20px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	box-sizing: border-box;
+}
+.app-main {
+	padding: 20px;
+	min-height: calc(100vh - 60px);
+	box-sizing: border-box;
+	background-color: #f7f8fa;
+}
+
+.app-sidebar-group-name {
+	line-height: 30px;
+	.app-sidebar-group-list {
+		padding-left: 20px;
+		cursor: pointer;
+	}
+}

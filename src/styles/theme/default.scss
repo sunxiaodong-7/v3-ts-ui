@@ -1,0 +1,48 @@
+@import "../common/variables.scss";
+
+$theme-default: (
+  'default': (
+    base: #ffffff,
+    primary: #409EFF,
+    success: #67C23A,
+    warning: #E6A23C,
+    danger: #F56C6C,
+    info: #909399,
+    disabled: #f5f7fa,
+
+    fontSize: (
+      base: $font-size-base,
+      medium: $font-size-base,
+      small: $font-size-small,
+      mini: $font-size-small
+    ),
+
+    paddingVertical: (
+      base: $padding-vertical-base,
+      medium: $padding-vertical-medium,
+      small: $padding-vertical-small,
+      mini: $padding-vertical-mini
+    ),
+    
+    paddingHorizontal: (
+      base: $padding-horizontal-base,
+      medium: $padding-horizontal-base,
+      small: $padding-horizontal-small,
+      mini: $padding-horizontal-small
+    ),
+
+    borderRadius: (
+      base: $border-default-radius,
+      medium: $border-default-radius,
+      small: #{$border-default-radius - 1},
+      mini: #{$border-default-radius - 1}
+    ),
+
+    inputHeight: (
+      base: $input-height,
+      medium: $input-height-medium,
+      small: $input-height-small,
+      mini: $input-height-mini
+    )
+  )
+)

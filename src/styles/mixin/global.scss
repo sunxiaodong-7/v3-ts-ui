@@ -1,0 +1,113 @@
+@import "../theme/default.scss";
+@import "./config.scss";
+
+$default: map-get($map: $theme-default, $key: 'default');
+
+@function getValue($key) {
+  @if(map-has-key($map: $globalTheme, $key: $key)) {
+    @return map-get($map: $globalTheme, $key: $key);
+  } @else {
+    @return map-get($map: $default, $key: $key);
+  }
+}
+
+@mixin generateThemeContent($name, $theme) {
+  $globalTheme: $theme!global;
+
+  $base: getValue(base)!global;
+  $primary: getValue(primary)!global;
+  $success: getValue(success)!global;
+  $warning: getValue(warning)!global;
+  $danger: getValue(danger)!global;
+  $info: getValue(info)!global;
+  $disabled: getValue(disabled)!global;
+
+  $primaryLight1: mix($base, $primary, 10%)!global;
+  $primaryLight2: mix($base, $primary, 20%)!global;
+  $primaryLight3: mix($base, $primary, 30%)!global;
+  $primaryLight4: mix($base, $primary, 40%)!global;
+  $primaryLight5: mix($base, $primary, 50%)!global;
+  $primaryLight6: mix($base, $primary, 60%)!global;
+  $primaryLight7: mix($base, $primary, 70%)!global;
+  $primaryLight8: mix($base, $primary, 80%)!global;
+  $primaryLight9: mix($base, $primary, 90%)!global;
+
+  @if (quote($string: $name) != 'default') {
+    .theme-#{$name} {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin theme {
+  @each $curThemeName, $curTheme in $theme-default {
+    @include generateThemeContent($curThemeName, $curTheme) {
+      @content;
+    }
+  }
+}
+
+@mixin blockquote($block) {
+  @each $unit in $block {
+    $blockName: #{$namespace + $unit}!global;
+    .#{$blockName} {
+      @content;
+    }
+  }
+}
+
+@mixin m($modify) {
+  $currentSelector: '';
+  @each $unit in $modify {
+    $currentSelector: #{$currentSelector + $blockName + $modify-separator + $unit + ','}
+  }
+  &.#{$currentSelector} {
+    @content;
+  }
+}
+
+@mixin e($element) {
+  $currentSelector: '';
+  @each $unit in $element {
+    $currentSelector: #{$currentSelector + $blockName + $element-separator + $unit + ','}
+  }
+  .#{$currentSelector} {
+    @content;
+  }
+}
+
+$color: primary, success, warning, danger, info;
+@mixin status {
+  @each $key in $color {
+    $value: getValue($key)!global;
+    // v-button--primary
+    @include m($key) {
+      @content;
+    }
+  }
+}
+
+$size: medium, small, mini;
+@mixin sizes {
+  @each $key in $size {
+    $fontSize: map-get($map: getValue(fontSize), $key: $key)!global;
+    $paddingVertical: map-get($map: getValue(paddingVertical), $key: $key)!global;
+    $paddingHorizontal: map-get($map: getValue(paddingHorizontal), $key: $key)!global;
+    $borderRadius: map-get($map: getValue(borderRadius), $key: $key)!global;
+    $inputHeight: map-get($map: getValue(inputHeight), $key: $key) !global;
+    
+    &.#{$blockName}--#{$key} {
+      @content;
+    }
+  }
+}
+
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix+$state} {
+      @content;
+    }
+  }
+}

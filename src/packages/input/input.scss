@@ -1,0 +1,89 @@
+@include theme {
+	@include blockquote((input,textarea)) {
+		display: inline-block;
+    position: relative;
+    font-size: $font-size-base;
+
+    & + .v-input,
+    & + .v-textarea {
+			margin-left: 5px;
+    }
+
+		@include e(inner) {
+      box-sizing: border-box;
+			outline: none;
+      border: none;
+      padding: 0 $padding-horizontal-small;
+			min-width: $input-width;
+			border: $border-default-width $border-default-style $border-default-color;
+			border-radius: $border-default-radius;
+			transition: all 150ms linear;
+			&:hover {
+				border-color: $primary;
+			}
+			&:focus {
+				border-color: $primary;
+				box-shadow: 0 0 2px $primary;
+      }
+      &::placeholder {
+        color: #c0c4cc;
+      }
+      &.v-input__inner {
+        height: $input-height;
+        line-height: $input-height;
+      }
+      &.v-textarea__inner {
+        padding: 5px $padding-horizontal-small;
+      }
+    }
+
+
+    .v-icon {
+      position: absolute;
+      fill: #c0c4cc;
+      width: 20px;
+      height: 20px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+
+    &.v-input__prefix {
+      .v-icon {
+        left: 5px;
+      }
+      @include e(inner) {
+        padding-left: 30px;
+      }
+    }
+
+    &.v-input__suffix {
+      .v-icon {
+        right: 5px;
+      }
+      @include e(inner) {
+        padding-right: 30px;
+      }
+    }
+
+    @include status {
+      @include e(inner) {
+        border-color: $value;
+        &:hover,
+        &:focus {
+          box-shadow: 0 0 2px $value;
+          border-color: mix($background-color-black, $value, $input-active-shade-percent);
+        }
+      }
+    }
+
+    @include sizes {
+      font-size: $fontSize;
+      border-radius: $borderRadius;
+      @include e(inner) {
+        height: $inputHeight;
+        line-height: $inputHeight;
+      }
+    }
+	}
+}

@@ -1,0 +1,139 @@
+@include theme {
+	@include blockquote(button) {
+		display: inline-flex;
+		line-height: 1;
+		white-space: nowrap;
+		cursor: pointer;
+		background-color: $background-default-color;
+		outline: none;
+		border: $border-default-width $border-default-style $border-default-color;
+		border-radius: $border-default-radius;
+		justify-content: center;
+    align-items: center;
+    padding: $padding-vertical-base $padding-horizontal-base;
+    vertical-align: middle;
+
+		&:hover,
+		&:focus {
+      color: $primary;
+      border-color: $primaryLight7;
+      background-color: $primaryLight9;
+    }
+
+    &:active {
+      color: mix(
+        $background-color-black,
+        $primary,
+        $button-active-shade-percent
+      );
+      border-color: mix(
+        $background-color-black,
+        $primary,
+        $button-active-shade-percent
+      );
+    }
+
+    &+.v-button {
+      margin-left: 10px;
+    }
+
+		@include status {
+			color: $base;
+      background-color: $value;
+      border-color: $value;
+      &:hover,
+      &:focus {
+        background-color: rgba($color: $value, $alpha: 0.8);
+      }
+      &:active {
+        background-color: mix(
+          $background-color-black,
+          $value,
+          $button-active-shade-percent
+        );
+        border-color: mix(
+          $background-color-black,
+          $value,
+          $button-active-shade-percent
+        );
+      }
+      @include when(disabled) {
+        &,
+        &:hover,
+        &:focus {
+          cursor: not-allowed;
+          color: $base;
+          background-color: mix($background-default-color, $value, 40%);
+        }
+      }
+		}
+		@include sizes {
+			font-size: $fontSize;
+			padding: $paddingVertical $paddingHorizontal;
+			border-radius: $borderRadius;
+    }
+    
+
+    @include when(disabled) {
+      &,
+      &:hover,
+      &:focus {
+        cursor: not-allowed;
+        color: $font-disabled-color;
+        background-color: $background-default-color;
+        border-color: $border-default-color;
+      }
+    }
+    @include when(loading) {
+      position: relative;
+      pointer-events: none;
+
+      &:before {
+        pointer-events: none;
+        content: '';
+        position: absolute;
+        left: -1px;
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+        border-radius: inherit;
+        background-color: rgba(255, 255, 255, 0.35);
+      }
+    }
+    & [class*=v-icon]+span {
+      margin: 0 5px;
+    }
+    .icon {
+      fill: #ffffff;
+      width: 20px;
+      height: 20px;
+    }
+    .loading {
+      animation: rotate 2s linear infinite;
+    }
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    @include m(icon-right) {
+      .icon {
+        order: 2;
+      }
+      span {
+        order: 1;
+      }
+    }
+    @include m(icon-left) {
+      .icon {
+        order: 1;
+      }
+      span {
+        order: 2;
+      }
+    }
+	}
+}
